@@ -1,16 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <VLevels @setLevel="setLevel"></VLevels>
+  <VAsk v-if='level'></VAsk>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VAsk from './components/v-ask'
+import VLevels from './components/v-levels.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    VAsk,
+    VLevels,
+  },
+  data(){
+    return {
+      level: undefined,
+    }
+  },
+  methods: {
+    setLevel(gettedLevel){
+      this.level = gettedLevel;
+    }
+  },
 }
 </script>
 
@@ -21,6 +33,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 0 auto;
+  max-width: 1000px;
 }
 </style>
