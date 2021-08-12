@@ -1,6 +1,7 @@
 <template>
   <VLevels @setLevel="setLevel"></VLevels>
-  <VAsk v-if='level'></VAsk>
+  <VAsk v-if='level' :level='level'></VAsk>
+  <p v-else>Выберите уровень</p>
 </template>
 
 <script>

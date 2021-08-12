@@ -1,14 +1,21 @@
 <template lang="">
-  <div class="question" v-for="(item, name, index) in questionsList" :key='index'>
-    <p>{{item.question}}</p>
-    <p @click="showAnswer(index)">Показать ответ</p>
-    <p v-show='item.isShowAnswer'>{{item.answer}}</p>
-  </div>
+  <VAskItem 
+    class="question" 
+    v-for="(item, name, index) in questionsList[level]" 
+    :key='index' 
+    :item = 'item'
+  >  
+  </VAskItem>
 </template>
 
 <script>
+import VAskItem from './v-ask-item.vue'
+
 export default {
   name: 'v-ask',
+  components: {
+    VAskItem
+  },
   data(){
     return {
       questionsList: {
@@ -58,11 +65,15 @@ export default {
       }
     }
   },
-  
+  props: {
+    level: {
+      type: String
+    }
+  },  
   methods: {
     showAnswer(index){
       console.log(index);
-      this.questionsList[index].isShowAnswer = true;
+      this.item.isShowAnswer = true;
     }
   }
 }
