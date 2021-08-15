@@ -42,7 +42,6 @@ body{
   text-align: center;
   color: #2c3e50;
   margin: 0 auto;
-  max-width: 1000px;
   padding: 0;
 }
 </style>
