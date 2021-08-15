@@ -1,68 +1,87 @@
 <template lang="">
-  <VAskItem 
-    class="question" 
-    v-for="(item, name, index) in questionsList[level]" 
-    :key='index' 
-    :item = 'item'
-  >  
-  </VAskItem>
+  <div id="ask">
+    <div v-if='progress < questionsList[level].length'>
+      <h2>Вопрос #{{ progress + 1}} / {{questionsList[level].length}}</h2>
+      <p>{{ questionsList[level].[progress].question }}</p>
+      <p v-if="isShowAnswer" >{{ questionsList[level].[progress].answer }}</p>
+      <div class="buttons">
+        <button 
+          v-if='!isShowAnswer'
+          class='showAnswer' 
+          @click='showAnswer'
+        >
+          Показать ответ
+        </button>
+        <button 
+          v-if='isShowAnswer'
+          class='user-answer-false' 
+          @click='userAnswerWrong'
+        >
+          Стоит повторить
+        </button>
+        <button 
+          v-if='isShowAnswer'
+          class='user-answer-true' 
+          @click='userAnswerRight'
+        >
+          Я знаю ответ
+        </button>
+      </div>
+    </div>
+    <VResult v-else :results='usersResults' />
+  </div>
 </template>
 
 <script>
-import VAskItem from './v-ask-item.vue'
+import VResult from './v-result.vue';
 
 export default {
   name: 'v-ask',
   components: {
-    VAskItem
+    VResult,
   },
   data(){
     return {
+      progress: 0,
+      isShowAnswer: false,
       questionsList: {
-        begginer: {
-          1: {
+        begginer: [
+          {
             question: 'Вопрос 1',
             answer: 'Ответ 1',
-            result: '',
-            isShowAnswer: false
           },
-          2: {
+          {
             question: 'Вопрос 2',
             answer: 'Ответ 2',
-            result: '',
-            isShowAnswer: false
           },
-          3: {
+          {
             question: 'Вопрос 3',
             answer: 'Ответ 3',
-            result: '',
-            isShowAnswer: false
           },
-          4: {
+          {
             question: 'Вопрос 4',
             answer: 'Ответ 4',
-            result: '',
-            isShowAnswer: false
           },
-        },
-        junior: {
-          1: {
+        ],
+        junior: [
+          {
             question: 'Вопрос 1',
             answer: 'Ответ 1',
-            result: ''
           },
-          2: {
+          {
             question: 'Вопрос 2',
             answer: 'Ответ 2',
-            result: ''
           },
-          3: {
+          {
             question: 'Вопрос 3',
             answer: 'Ответ 3',
-            result: ''
           },
-        }
-      }
+        ],
+      },
+      usersResults: {
+        wrong: [],
+        right: [],
+      },
     }
   },
   props: {
@@ -71,9 +90,18 @@ export default {
     }
   },  
   methods: {
-    showAnswer(index){
-      console.log(index);
-      this.item.isShowAnswer = true;
+    showAnswer(){
+      this.isShowAnswer = true;
+    },
+    userAnswerRight(){
+      this.usersResults.right.push(this.questionsList[this.level].[this.progress]);
+      this.isShowAnswer = false;
+      this.progress++;
+    },
+    userAnswerWrong(){
+      this.usersResults.wrong.push(this.questionsList[this.level].[this.progress]);
+      this.isShowAnswer = false;
+      this.progress++;
     }
   }
 }
@@ -86,5 +114,22 @@ export default {
     padding: 10px;
     box-shadow: 0px 0px 10px 4px rgb(223, 223, 223);
     border-radius: 3px;
+  }
+  .buttons{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .showAnswer{
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .showAnswer:hover{
+    cursor:pointer;
   }
 </style>

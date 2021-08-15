@@ -1,9 +1,11 @@
 <template lang="">
   <div class="level-choise-wrapper">
-    <div class="level-choise-item" @click="setLevel('begginer')">Begginer</div>
-    <div class="level-choise-item" @click="setLevel('junior')">Junior</div>
-    <div class="level-choise-item" @click="setLevel('middle')">Middle</div>
-    <div class="level-choise-item" @click="setLevel('senior')">Senior</div>
+    <h1>check-u</h1>
+    <p>Выберите уровень</p>
+    <div class="level-choise-item" id="begginer" @click="setLevel('begginer')">Begginer</div>
+    <div class="level-choise-item" id="junior" @click="setLevel('junior')">Junior</div>
+    <div class="level-choise-item" id="middle" @click="setLevel('middle')">Middle</div>
+    <div class="level-choise-item" id="senior" @click="setLevel('senior')">Senior</div>
   </div>
 </template>
 
@@ -19,18 +21,27 @@ export default {
 </script>
 
 <style lang="css">
-  .level-choise-wrapper{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
   .level-choise-item{
-    background-color: rgb(186, 170, 255);
-    width: 200px;
-    height: 180px;
-    margin: 5px;
-    text-align: left;
-    border-radius: 4px;
+    width: 300px;
+    height: 70px;
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    font-size: 20px;
+  }
+  #begginer{
+    background-image: url('../assets/images/begginer-bg.jpg');
+  }
+  #junior{
+    background-image: url('../assets/images/junior-bg.jpg');
+  }
+  #middle{
+    background-image: url('../assets/images/middle-bg.jpg');
+  }
+  #senior{
+    background-image: url('../assets/images/senior-bg.jpg');
   }
   .level-choise-item:hover{
     cursor: pointer;
