@@ -1,29 +1,27 @@
 <template>
-  <VLevels @setLevel="setLevel" v-if='!level'></VLevels>
-  <VAsk v-if='level' :level='level'></VAsk>
-  
+  <div>
+    <VLevels @setLevel="setLevel" v-if='!this.$store.state.category'></VLevels>
+    <VAsker v-else/>
+  </div>
 </template>
 
 <script>
-import VAsk from './components/v-ask'
+
 import VLevels from './components/v-levels.vue';
+import VAsker from './components/v-asker.vue';
 
 export default {
   name: 'App',
   components: {
-    VAsk,
     VLevels,
-  },
-  data(){
-    return {
-      level: undefined,
-    }
+    VAsker,
   },
   methods: {
-    setLevel(gettedLevel){
-      this.level = gettedLevel;
+    setLevel(level){
+      this.$store.commit('setCategory', level);
+      console.log(level);
     }
-  },
+  }
 }
 </script>
 

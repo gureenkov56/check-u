@@ -1,11 +1,16 @@
 <template lang="">
   <div class="level-choise-wrapper">
     <h1>check-u</h1>
-    <p>Выберите уровень</p>
-    <div class="level-choise-item" id="begginer" @click="setLevel('begginer')">Begginer</div>
-    <div class="level-choise-item" id="junior" @click="setLevel('junior')">Junior</div>
-    <div class="level-choise-item" id="middle" @click="setLevel('middle')">Middle</div>
-    <div class="level-choise-item" id="senior" @click="setLevel('senior')">Senior</div>
+    <p>Выберите уровень </p>
+    <div 
+      v-for='(category, key) in this.$store.state.questionsList' 
+      :key='category'
+      @click="setLevel(key)"
+      class="level-choise-item"
+      :id="key"
+      >
+      {{ key.toUpperCase() }}
+    </div>
   </div>
 </template>
 
@@ -31,19 +36,21 @@ export default {
     border-radius: 35px;
     font-size: 20px;
   }
-  #begginer{
+  #html{
     background-image: url('../assets/images/begginer-bg.jpg');
   }
-  #junior{
+  #css{
     background-image: url('../assets/images/junior-bg.jpg');
   }
-  #middle{
+  #javascript{
     background-image: url('../assets/images/middle-bg.jpg');
   }
-  #senior{
+  #php{
     background-image: url('../assets/images/senior-bg.jpg');
   }
   .level-choise-item:hover{
     cursor: pointer;
+    transition: all .5s;
+    transform: scale(1.05);
   }
 </style>
