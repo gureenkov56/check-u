@@ -45,25 +45,14 @@ export default {
         this.clickedKey = clickedKey;
         let rightKey = this.$store.state.questionsList[this.$store.state.category][this.progress].rightOption;
         this.isShowAnswer = true;
-
+        let gettedObj = {
+          idQuestion: this.progress,
+          clickedKey: clickedKey
+        };
         if(rightKey == clickedKey){
-          console.log(clickedKey + ' - right');
-          let gettedObj = {
-              idQuestion: this.progress,
-              clickedKey: clickedKey
-          };
-
-          this.$emit('addRightAnswer', gettedObj)
+          this.$store.commit('addRightResult', gettedObj);
         } else {
-
-          this.$store.state.usersResults.wrong.push(
-            {
-              idQuestion: this.progress,
-              clickedKey: clickedKey
-            }
-          )
-          console.log(this.$store.state.usersResults.wrong);
-
+          this.$store.commit('addWrongResult', gettedObj);
         }
       }
     }

@@ -19,7 +19,9 @@ export default {
   name: 'v-levels',
   methods:{
     setLevel(gettedLevel){
-      this.$emit('setLevel', gettedLevel)
+      this.$store.commit('setCategory', gettedLevel);
+
+      // this.$emit('setLevel', gettedLevel)
     }
   }
 }

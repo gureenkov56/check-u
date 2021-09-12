@@ -16,14 +16,6 @@ export default {
     VLevels,
     VAsker,
   },
-  methods: {
-    setLevel(level){
-      this.$store.commit('setCategory', level);
-    },
-    addRightAnswer(obj){
-      this.$store.commit('addRightResult', obj);
-    }
-  }
 }
 </script>
 

@@ -102,7 +102,10 @@ const store = createStore({
       state.category = level;
     },
     addRightResult(state, obj) {
-      state.usersResults.push(obj);
+      state.usersResults.right.push(obj);
+    },
+    addWrongResult(state, obj) {
+      state.usersResults.wrong.push(obj);
     },
   },
 });
