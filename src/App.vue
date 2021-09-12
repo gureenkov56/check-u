@@ -19,7 +19,9 @@ export default {
   methods: {
     setLevel(level){
       this.$store.commit('setCategory', level);
-      console.log(level);
+    },
+    addRightAnswer(obj){
+      this.$store.commit('addRightResult', obj);
     }
   }
 }
@@ -29,7 +31,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
 
 body{
-  padding: 0;
+  padding: 0px 10px;
   margin: 0;
 }
 
@@ -42,4 +44,6 @@ body{
   margin: 0 auto;
   padding: 0;
 }
+
+
 </style>
