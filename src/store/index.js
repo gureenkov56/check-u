@@ -5,6 +5,7 @@ const store = createStore({
     return {
       isShowAnswer: false,
       category: "",
+      finishOfTest: false,
       questionsList: {
         html: [
           {
@@ -27,16 +28,6 @@ const store = createStore({
               "Document > html > head> body",
             ],
             rightOption: 2,
-          },
-          {
-            question: "Вопрос 3",
-            answer: "Ответ 3",
-            isShowAnswerInTheEnd: false,
-          },
-          {
-            question: "Вопрос 4",
-            answer: "Ответ 4",
-            isShowAnswerInTheEnd: false,
           },
         ],
         css: [
@@ -107,6 +98,15 @@ const store = createStore({
     addWrongResult(state, obj) {
       state.usersResults.wrong.push(obj);
     },
+    finishOfTestToggle(state){
+      state.finishOfTest = !state.finishOfTest;
+    },
+    setDefaultData(state){
+      state.category = "";
+      state.usersResults.wrong = [];
+      state.usersResults.right = [];
+      state.finishOfTest = false;
+    }
   },
 });
 

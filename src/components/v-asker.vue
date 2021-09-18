@@ -9,7 +9,10 @@
     <div 
       class="answer-options"
       :class='[
-        isShowAnswer && key == this.$store.state.questionsList[this.$store.state.category][progress].rightOption ? "rightOption" : "",
+        isShowButtonNext && key == this.$store.state.questionsList[this.$store.state.category][progress].rightOption ? "rightOption" : "",
+        //проверка для последнего вопроса
+        isShowButtonFinish && key == this.$store.state.questionsList[this.$store.state.category][progress].rightOption ? "rightOption" : "",
+
         clickedKey == key &&  key !== this.$store.state.questionsList[this.$store.state.category][progress].rightOption ? "falseOption" : ""
       ]'
       v-for='(option, key) in this.$store.state.questionsList[this.$store.state.category][progress].options'
@@ -19,8 +22,11 @@
       {{option}}
     </div>
 
-    <button v-if='isShowAnswer' @click='nextQuestion'>
+    <button v-if='isShowButtonNext' @click='nextQuestion'>
       Далее
+    </button>
+    <button v-if='isShowButtonFinish' @click='finishTest'>
+      Закончить тест
     </button>
   </div>
 </template>
@@ -30,31 +36,43 @@ export default {
   data(){
     return {
       progress: 0,
-      isShowAnswer: false,
+      isShowButtonNext: false,
+      isShowButtonFinish: false,
       clickedKey: undefined,
     }
   },
   methods: {
     nextQuestion: function(){
-      this.isShowAnswer = false;
+      this.isShowButtonNext = false;
       this.progress++;
       this.clickedKey = undefined;
     },
     checkAnswer: function(clickedKey){
-      if(!this.isShowAnswer){
+      if(!this.isShowButtonNext && !this.isShowButtonFinish){
         this.clickedKey = clickedKey;
         let rightKey = this.$store.state.questionsList[this.$store.state.category][this.progress].rightOption;
-        this.isShowAnswer = true;
+
+        if(this.$store.state.questionsList[this.$store.state.category].length == this.progress + 1){
+          //если это последний вопрос, то выводим кнопку финиш
+          this.isShowButtonFinish = true;
+        } else {
+          //если нет, то кнопку Далее
+          this.isShowButtonNext = true;
+        }
+
         let gettedObj = {
           idQuestion: this.progress,
-          clickedKey: clickedKey
         };
+
         if(rightKey == clickedKey){
           this.$store.commit('addRightResult', gettedObj);
         } else {
           this.$store.commit('addWrongResult', gettedObj);
         }
       }
+    },
+    finishTest: function(){
+      this.$store.commit('finishOfTestToggle');
     }
   }
 }

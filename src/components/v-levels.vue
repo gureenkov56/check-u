@@ -1,7 +1,7 @@
 <template lang="">
   <div class="level-choise-wrapper">
     <h1>check-u</h1>
-    <p>Выберите уровень </p>
+    <p>Выберите категорию</p>
     <div 
       v-for='(category, key) in this.$store.state.questionsList' 
       :key='category'
