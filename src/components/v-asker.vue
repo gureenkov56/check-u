@@ -1,21 +1,22 @@
 <template lang="">
   <div>
-    <h2>Вопрос №{{ progress+1 }} / {{ this.$store.state.questionsList[this.$store.state.category].length }}</h2>
+    <h2>Вопрос №{{ progress+1 }} / {{ getTotalCountOfQuestion(getCategory) }}</h2>
 
     <div id="question">
-      {{this.$store.state.questionsList[this.$store.state.category][progress].question}}
+      {{ getQuestion(getCategory, progress).question }}
+      <!-- {{this.$store.state.questionsList[this.$store.state.category][progress].question}} -->
     </div>
 
     <div 
       class="answer-options"
       :class='[
-        isShowButtonNext && key == this.$store.state.questionsList[this.$store.state.category][progress].rightOption ? "rightOption" : "",
+        isShowButtonNext && key == getQuestion(getCategory, progress).rightOption ? "rightOption" : "",
         //проверка для последнего вопроса
-        isShowButtonFinish && key == this.$store.state.questionsList[this.$store.state.category][progress].rightOption ? "rightOption" : "",
+        isShowButtonFinish && key == getQuestion(getCategory, progress).rightOption ? "rightOption" : "",
 
-        clickedKey == key &&  key !== this.$store.state.questionsList[this.$store.state.category][progress].rightOption ? "falseOption" : ""
+        clickedKey == key &&  key !== getQuestion(getCategory, progress).rightOption ? "falseOption" : ""
       ]'
-      v-for='(option, key) in this.$store.state.questionsList[this.$store.state.category][progress].options'
+      v-for='(option, key) in getQuestion(getCategory, progress).options'
       @click='checkAnswer(key)'
       :key='key'
     >
@@ -32,6 +33,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data(){
     return {
@@ -40,6 +43,13 @@ export default {
       isShowButtonFinish: false,
       clickedKey: undefined,
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getQuestion',
+      'getCategory',
+      'getTotalCountOfQuestion'
+    ])
   },
   methods: {
     nextQuestion: function(){
@@ -50,9 +60,9 @@ export default {
     checkAnswer: function(clickedKey){
       if(!this.isShowButtonNext && !this.isShowButtonFinish){
         this.clickedKey = clickedKey;
-        let rightKey = this.$store.state.questionsList[this.$store.state.category][this.progress].rightOption;
+        let rightKey = this.getQuestion(this.getCategory, this.progress).rightOption;
 
-        if(this.$store.state.questionsList[this.$store.state.category].length == this.progress + 1){
+        if(this.getTotalCountOfQuestion(this.getCategory) == this.progress + 1){
           //если это последний вопрос, то выводим кнопку финиш
           this.isShowButtonFinish = true;
         } else {

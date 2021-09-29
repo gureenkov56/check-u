@@ -9,7 +9,54 @@ const store = createStore({
       questionsList: {
         html: [
           {
-            question: "Для чего нужен HTML?",
+            question: "Что такое HTML?",
+            options: [
+              "HTML — язык разметки документов для просмотра веб-страниц в браузере. Элементы HTML являются строительными блоками HTML страницы. Теги позволяют создавать блоки, заголовки, списки, формы и т.д.",
+              "HTML - язык, позволяющий создать элементы на странице, задать их расположение, цвет, анимацию и взимодействие.",
+              "HTML - это набор тегов и правил, которые необходимы для браузера и никак не влияют на отображение страницы.",
+            ],
+            rightOption: 0,
+          },
+          {
+            question: "Как выглядить базовая структура HTML-документа?",
+            options: [
+              `
+              <!DOCTYPE html>
+              <html>
+                <body>
+                  <head>
+                    <meta charset=UTF-8>
+                    <title>Hello World!</title>
+                  </head>
+                </body>
+              </html>
+              `,
+              `
+              <!DOCTYPE html>
+              <html>
+                <head>
+                  <meta charset=UTF-8>
+                  <title>Hello World!</title>
+                </head>
+                <body>
+                </body>
+              </html>
+              `,
+              `
+              <html>
+                <header>
+                  <meta charset=UTF-8>
+                  <title>Hello World!</title>
+                </header>
+                <body>
+                </body>
+              </html>
+              `,
+            ],
+            rightOption: 1,
+          },
+          {
+            question: "Чтобы добавлено в HTML5?",
             options: [
               `
               HTML (от англ. HyperText Markup Language — «язык гипертекстовой разметки») — стандартизированный язык разметки документов для просмотра веб-страниц в браузере.
@@ -21,13 +68,51 @@ const store = createStore({
             rightOption: 0,
           },
           {
-            question: "Как выглядить базовая структура HTML-документа?",
-            options: [
-              "body > head > document > footer",
-              "Document > head > body",
-              "Document > html > head> body",
-            ],
-            rightOption: 2,
+            question:
+              "Как создать ссылку на странице? Как настроить открытие ссылки в новой вкладке?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
+          },
+          {
+            question: "Какие теги влияют на семантику страницы?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
+          },
+          {
+            question:
+              "Чем отличаются элементы типа inline от block-level (блочные)?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
+          },
+          {
+            question: "Зачем нужны meta-теги в HTML?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
+          },
+          {
+            question: "Как создаются списки в HTML?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
+          },
+          {
+            question: "Зачем нужет тег <iframe>?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
+          },
+          {
+            question: "Что такое SVG элементы?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
+          },
+          {
+            question: "Для чего нужен тег <canvas>?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
+          },
+          {
+            question: "Какие режимы совместимости есть у HTML?",
+            options: ["1вариант", "2вариант", "3вариант"],
+            rightOption: 0,
           },
         ],
         css: [
@@ -87,6 +172,17 @@ const store = createStore({
         right: [],
       },
     };
+  },
+  getters: {
+    getCategory: state => {
+      return state.category;
+    },
+    getQuestion: state => (category, progress) => {
+      return state.questionsList[category][progress];
+    },
+    getTotalCountOfQuestion: state => category => {
+      return state.questionsList[category].length;
+    }
   },
   mutations: {
     setCategory(state, level) {

@@ -12,6 +12,8 @@ import VLevels from './components/v-levels.vue';
 import VAsker from './components/v-asker.vue';
 import VTestFinish from './components/v-test-finish.vue'
 
+
+
 export default {
   name: 'App',
   components: {
