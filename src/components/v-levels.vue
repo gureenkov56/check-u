@@ -20,8 +20,6 @@ export default {
   methods:{
     setLevel(gettedLevel){
       this.$store.commit('setCategory', gettedLevel);
-
-      // this.$emit('setLevel', gettedLevel)
     }
   }
 }

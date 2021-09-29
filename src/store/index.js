@@ -177,11 +177,17 @@ const store = createStore({
     getCategory: state => {
       return state.category;
     },
-    getQuestion: state => (category, progress) => {
-      return state.questionsList[category][progress];
+    getQuestion: state => (category, id) => {
+      return state.questionsList[category][id];
     },
     getTotalCountOfQuestion: state => category => {
       return state.questionsList[category].length;
+    },
+    getUserResult: state => {
+      return state.usersResults;
+    },
+    getRightAnswer: state => (category, id) => {
+      return state.questionsList[category][id].options[state.questionsList[category][id].rightOption];
     }
   },
   mutations: {
