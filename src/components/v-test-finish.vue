@@ -11,10 +11,10 @@
     </div>
 
     <h2 v-if='getUserResult.right.length'>Вопросы с верным ответом</h2>
-    <div v-for='(answer, idx) in this.$store.state.usersResults.right' :key='idx' class="finishList">
-      <h2>{{this.$store.state.questionsList[this.$store.state.category][answer.idQuestion].question}}</h2>
+    <div v-for='(answer, idx) in getUserResult.right' :key='idx' class="finishList">
+      <h2>{{getQuestion(getCategory, answer.idQuestion).question}}</h2>
       <p>Правильный ответ:</p>
-      <p>{{this.$store.state.questionsList[this.$store.state.category][answer.idQuestion].options[this.$store.state.questionsList[this.$store.state.category][answer.idQuestion].rightOption]}}</p>
+      <p>{{getRightAnswer(getCategory, answer.idQuestion)}}</p>
     </div>
     <button @click='setDefault'>
       На главную страницу
