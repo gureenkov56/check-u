@@ -8,6 +8,14 @@
 
 <script>
 
+/****
+ * toDo: - Сделать кнопку "Закончить тест"
+ *       - всегда показывать "Далее", но делать неактивной
+ *       - результаты подкрасить красным м зеленым
+ */
+
+
+
 import VLevels from './components/v-levels.vue';
 import VAsker from './components/v-asker.vue';
 import VTestFinish from './components/v-test-finish.vue'
